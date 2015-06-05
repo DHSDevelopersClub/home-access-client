@@ -33,6 +33,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     var drawerPanel = document.querySelector('#paperDrawerPanel');
     drawerPanel.forceNarrow = true;
   });
+  
+  app.loadGradeInfo = function() {
+    if (localStorage.grades) {
+      app.classrooms = GibberishAES.dec(localStorage.grades, app.password);
+    }
+    sendPostRequest(app.username, app.password, function(response){
+      if (response.status === "OK") {
+        localStorage.grades = GibberishAES.enc(response, app.password);
+        app.classrooms = response;
+      }
+      else {
+        app.password = '';
+      }
+
+    });
+  }
+
+  var sendPostRequest = function(username, password, callback) {
+   gapi.client.homeaccessclient.login({
+       "username": username,
+       "password": password,
+   }).execute(callback);
+  };
 
 })(document);
 
