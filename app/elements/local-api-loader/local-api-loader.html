@@ -1,0 +1,44 @@
+<!-- Load all necessary apis. -->
+
+<dom-module id="local-api-loader">
+
+</dom-module>
+<script>
+    /**
+     * Connect to Endpoints.  Taken from example at
+     * `https://cloud.google.com/appengine/docs/python/endpoints/consume_js`.
+     */
+    window.api = {
+        CLIENT_ID: '912907751553-lb6mvsskb62dpre0kje7fbvriracme0m.apps.googleusercontent.com',
+        ROOT: 'https://signed-drakehs.appspot.com/_ah/api',
+        onload: function() {},
+    };
+    window.apiInit = function() {
+        var apisToLoad;
+        var loadCallback = function() {
+            if (--apisToLoad == 0) {
+                signIn(true, function() {
+                    window.api.onload();
+                });
+            }
+        };
+        apisToLoad = 1; // must match number of calls to gapi.client.load()
+        gapi.client.load('homeaccessclient', 'v1', loadCallback, window.api.ROOT);
+    };
+    window.signIn = function(mode, authorizeCallback) {
+        gapi.auth.authorize({client_id: window.api.CLIENT_ID,
+                             scope: window.api.SCOPES,
+                             immediate: mode},
+                            authorizeCallback);
+    };
+    Polymer({
+        is: 'local-api-loader',
+        getOnload: function() {
+            return window.api.onload;
+        },
+        setOnload: function(newFunc) {
+            window.api.onload = newFunc;
+        },
+    });
+</script>
+<script src="https://apis.google.com/js/client.js?onload=apiInit"></script>
