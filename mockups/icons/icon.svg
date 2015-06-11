@@ -23,6 +23,18 @@
   <defs
      id="defs4">
     <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4511">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop4513" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop4515" />
+    </linearGradient>
+    <linearGradient
        id="linearGradient5598"
        osb:paint="solid">
       <stop
@@ -265,6 +277,15 @@
          stdDeviation="3.5607565"
          id="feGaussianBlur4777" />
     </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4511"
+       id="linearGradient4517"
+       x1="300"
+       y1="399.27802"
+       x2="798.31848"
+       y2="897.5965"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -273,16 +294,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.45254834"
-     inkscape:cx="613.6466"
-     inkscape:cy="492.65169"
+     inkscape:zoom="0.17487773"
+     inkscape:cx="504.87416"
+     inkscape:cy="542.36094"
      inkscape:document-units="px"
      inkscape:current-layer="layer11"
      showgrid="false"
      showborder="true"
      units="px"
-     inkscape:window-width="1215"
-     inkscape:window-height="776"
+     inkscape:window-width="1535"
+     inkscape:window-height="1176"
      inkscape:window-x="65"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
@@ -408,6 +429,18 @@
        position="897.04405,178.74062"
        orientation="-0.70710678,0.70710678"
        id="guide4567"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="300,624.722"
+       orientation="0.70710678,0.70710678"
+       id="guide4505"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="512,945.15301"
+       orientation="0.70710678,0.70710678"
+       id="guide4507"
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
   </sodipodi:namedview>
@@ -696,13 +729,15 @@
       <g
          inkscape:groupmode="layer"
          id="layer13"
-         inkscape:label="Page-Shadow" />
+         inkscape:label="Page-Shadow"
+         style="display:inline" />
       <g
          inkscape:groupmode="layer"
          id="layer18"
-         inkscape:label="Page-Main">
+         inkscape:label="Page-Main"
+         style="display:inline">
         <rect
-           style="display:inline;opacity:0.48800001;fill:#000000;fill-opacity:1;stroke:none;stroke-width:5.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter4775)"
+           style="display:inline;opacity:0.181;fill:#000000;fill-opacity:1;stroke:none;stroke-width:5.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter4775)"
            id="rect4557-7"
            width="591.00732"
            height="833.29529"
@@ -730,7 +765,7 @@
          inkscape:label="Cover-Shadow"
          style="display:inline">
         <rect
-           style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-opacity:1;filter:url(#filter5021)"
+           style="display:inline;opacity:0.366;fill:#000000;fill-opacity:1;stroke:none;stroke-opacity:1;filter:url(#filter5021)"
            id="rect3308-9"
            width="630.87463"
            height="904.20557"
@@ -755,6 +790,11 @@
            x="168"
            y="79.794456"
            ry="65.760864" />
+        <path
+           style="fill:url(#linearGradient4517);fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1;opacity:0.185"
+           d="M 300,399.278 512,78.84699 795.15301,362 798.97699,898.25499 300,399.278"
+           id="path4509"
+           inkscape:connector-curvature="0" />
       </g>
       <g
          inkscape:groupmode="layer"
@@ -763,7 +803,8 @@
         <g
            inkscape:groupmode="layer"
            id="layer3"
-           inkscape:label="Shadow">
+           inkscape:label="Shadow"
+           style="display:none">
           <path
              style="display:inline;opacity:0.55;fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter4914)"
              d="m 314.95922,112.28711 0,319.51759 100,-97.15235 112,97.63477 0,-320.00001 -212,0 z"
@@ -776,10 +817,15 @@
            inkscape:label="Bookmark-Main">
           <path
              style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
-             d="M 300,80 300,399.51758 400,302.36523 512,400 512,80 300,80 Z"
+             d="M 300,80 300,399.51758 400,288.21321 512,400 512,80 Z"
              id="rect4084"
-             inkscape:connector-curvature="0" />
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cccccc" />
         </g>
+        <g
+           inkscape:groupmode="layer"
+           id="layer20"
+           inkscape:label="Drop Shadow" />
       </g>
     </g>
   </g>
