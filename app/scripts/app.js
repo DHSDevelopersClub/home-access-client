@@ -33,22 +33,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     var drawerPanel = document.querySelector('#paperDrawerPanel');
     drawerPanel.forceNarrow = true;
   });
-  
+
+  app.passwordIsWrong = false;
+
   app.loadGradeInfo = function() {
     if (localStorage.grades) {
-      app.classrooms = GibberishAES.dec(localStorage.grades, app.password);
+      try {
+        app.classrooms = GibberishAES.dec(localStorage.grades, app.username+app.password);
+        console.log("loaded from localStorage");
+      }
+      catch(e) {
+          app.passwordIsWrong = true;
+          console.log("wrong password");
+      }
     }
-    sendPostRequest(app.username, app.password, function(response){
-      if (response.status === "OK") {
-        localStorage.grades = GibberishAES.enc(response, app.password);
-        app.classrooms = response;
-      }
-      else {
-        app.password = '';
-      }
 
-    });
-  }
+    if (!app.passwordIsWrong) {
+      sendPostRequest(app.username, app.password, function(response){
+        if (response.status === "OK") {
+          localStorage.grades = GibberishAES.enc(response, app.username+app.password);
+          app.classrooms = response;
+          console.log("loaded from server");
+        }
+        else {
+          app.passwordIsWrong = true;
+          app.password = '';
+          console.log("wrong password");
+        }
+
+      });
+    }
+  };
 
   var sendPostRequest = function(username, password, callback) {
    gapi.client.homeaccessclient.login({
