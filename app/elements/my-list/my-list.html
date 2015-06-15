@@ -9,11 +9,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <dom-module id="my-list">
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
   <template>
     <ul>
       <template is="dom-repeat" items="{{items}}">
@@ -22,7 +22,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </ul>
   </template>
 
-</dom-module>
   <script>
     (function () {
       Polymer({
@@ -34,15 +33,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         },
         ready: function() {
-        this.items = [
+          this.items = [
             'Responsive Web App boilerplate',
             'Iron Elements and Paper Elements',
             'End-to-end Build Tooling (including Vulcanize)',
             'Unit testing with Web Component Tester',
             'Routing with Page.js',
             'Offline support with the Platinum Service Worker Elements'
-            ];
+          ];
         }
       });
     })();
   </script>
+
+</dom-module>

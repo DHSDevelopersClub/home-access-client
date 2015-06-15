@@ -7,7 +7,7 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-(function (document) {
+(function(document) {
   'use strict';
 
   // Grab a reference to our auto-binding template
@@ -21,7 +21,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   // Listen for template bound event to know when bindings
   // have resolved and content has been stamped to the page
-  app.addEventListener('template-bound', function() {
+  app.addEventListener('dom-change', function() {
     console.log('Our app is ready to rock!');
   });
 
@@ -35,6 +35,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   });
 
   app.passwordIsWrong = false;
+
+  app.onMenuSelect = function() {
+    var drawerPanel = document.querySelector('#paperDrawerPanel');
+    if (drawerPanel.narrow) {
+      drawerPanel.closeDrawer();
+    }
+  };
 
   app.loadGradeInfo = function() {
     if (localStorage[app.username]) {
