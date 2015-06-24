@@ -15,6 +15,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   var app = document.querySelector('#app');
 
+  app.tableData = [{food: 1, money: 100},{food: 11, money:12},{food: 999999999, money: 0}];
+
   app.displayInstalledToast = function() {
     document.querySelector('#caching-complete').show();
   };
