@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<dom-module id="polymer-table">
+
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .table > th { font-weight: 300; }
+    table, th, td {
+      font-weight: 300;
+    }
+    .table { font-weight: 300; }
+  </style>
+
+  <template>
+    <div hidden>
+      <content></content>
+    </div>
+    <table class="table table-bordered">
+      <tr class="headers"></tr>
+    </table>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        is: "polymer-table",
+        properties: {
+          data: {
+            type: Array,
+            value: []
+          }
+        },
+        attached: function() {
+           this.async(function() {
+             var tableLocation = this.querySelectorAll('table')[0];
+             var tableHeaders = this.getElementsByClassName("headers")[0];
+             var columnElements = this.querySelectorAll('polymer-column');
+             var columns = [];
+             var tableText = tableLocation.innerHTML;
+             [].forEach.call(columnElements, function(c) {
+               columns.push(c.attributes.name.value);
+               tableText += '<th>' + c.innerHTML + '</th>';
+             });
+             this.data.forEach(function(rowData) {
+               tableText += '<tr>';
+               columns.forEach(function(column) {
+                 tableText += '<td>' + rowData[column] + '</td>';
+               });
+               tableText += '</tr>';
+             });
+             tableLocation.innerHTML = tableText;
+           });
+        }
+      });
+    })();
+  </script>
+
+</dom-module>
