@@ -33,7 +33,7 @@
              this.data.forEach(function(rowData) {
                tableText += '<tr>';
                columns.forEach(function(column) {
-                 tableText += '<td>' + JSON.stringify(rowData[column]) + '</td>';
+                 tableText += '<td>' + rowData[column] + '</td>';
                });
                tableText += '</tr>';
              });

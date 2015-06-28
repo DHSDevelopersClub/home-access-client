@@ -110,18 +110,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
             <section data-route="home">
-              <paper-material elevation="1">
-                <my-greeting></my-greeting>
-                <polymer-table data={{tableData}}>
-                  <polymer-column name="food">Food</polymer-column>
-                  <polymer-column name="money">Money</polymer-column>
-                </polymer-table>
 
-                <p class="paper-font-subhead">You now have:</p>
-                <my-list></my-list>
+              <template is="dom-repeat" items="{{classrooms}}" id="classes">
+                <local-class data="{{item}}"></local-class>
+              </template>
 
-                <p class="paper-font-body2">Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
-              </paper-material>
               <paper-material elevation="1">
                 <p class="paper-font-body2">This is another card.</p>
               </paper-material>

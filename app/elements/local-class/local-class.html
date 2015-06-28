@@ -1,13 +1,29 @@
 <dom-module id="local-class">
   <template>
     <paper-material elevation="1">
-      <div>
-        Class Title
+      <div id="title">
+        This is a title <span>{{data.title}}</span>
       </div>
-      <iron-media-query query="(min-width: 600px)" queryMatches="{{isMobile}}"></iron-media-query>
-      <template>
-
-      </template>
+      <iron-collapse id="table">
+        <polymer-table data="{{data.assignments}}">
+          <polymer-column name="title">Title</polymer-column>
+          <polymer-column name="score">Score</polymer-column>
+          <polymer-column name="max_score">Total</polymer-column>
+          <polymer-column name="date_due">Due</polymer-column>
+        </polymer-table>
+      </iron-collapse>
     </paper-material>
   </template>
+  <script>
+    (function () {
+      Polymer({
+        is: "local-class",
+        properties: {
+          data: {
+            type: Object
+          }
+        }
+      });
+    })();
+  </script>
 </dom-module>

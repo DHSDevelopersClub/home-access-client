@@ -48,7 +48,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   app.loadGradeInfo = function() {
     if (localStorage[app.username]) {
       try {
-        app.classrooms = GibberishAES.dec(localStorage[app.username], app.password);
+        app.classrooms = JSON.parse(GibberishAES.dec(localStorage[app.username], app.password));
         console.log("loaded from localStorage");
       }
       catch(e) {
@@ -60,8 +60,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     if (!app.passwordIsWrong) {
       sendPostRequest(app.username, app.password, function(response){
         if (response.status === "OK") {
-          localStorage[app.username] = GibberishAES.enc(response, app.password);
-          app.classrooms = response;
+          localStorage[app.username] = GibberishAES.enc(JSON.stringify(response.classes), app.password);
+          app.classrooms = response.classes;
           console.log("loaded from server");
         }
         else {
