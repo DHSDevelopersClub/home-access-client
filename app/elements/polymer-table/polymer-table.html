@@ -1,7 +1,10 @@
 <dom-module id="polymer-table">
+  <link rel="import" type="css" href="css/style.css">
   <template>
-    <content></content>
-    <table>
+    <div hidden>
+      <content></content>
+    </div>
+    <table class="table table-hover">
       <tr class="headers"></tr>
     </table>
   </template>
@@ -23,15 +26,11 @@
              var columnElements = this.querySelectorAll('polymer-column');
              var columns = [];
              var tableText = tableLocation.innerHTML;
-             console.log(columnElements);
              [].forEach.call(columnElements, function(c) {
                columns.push(c.attributes.name.value);
                tableText += '<th>' + c.innerHTML + '</th>';
              });
-             console.log(this.data);
-             console.log(columns);
              this.data.forEach(function(rowData) {
-               console.log(rowData);
                tableText += '<tr>';
                columns.forEach(function(column) {
                  tableText += '<td>' + JSON.stringify(rowData[column]) + '</td>';
