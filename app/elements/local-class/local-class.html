@@ -1,19 +1,44 @@
 <dom-module id="local-class">
+
+  <style>
+    #overview {
+      @apply(--layout-horizontal);
+    }
+    #title {
+      @apply(--layout-flex);
+    }
+    #letter {
+      margin-right: 16px;
+    }
+    :host > paper-material {
+      padding: 16px;
+      margin-bottom: 16px;
+      font-family: "Roboto", sans-serif;
+      font-weight: 300;
+      font-size: 1.2rem;
+    }
+  </style>
+
   <template>
     <paper-material elevation="1">
-      <div id="title">
-        This is a title <span>{{data.title}}</span>
+      <div id="overview" on-tap="overviewTapped">
+        <span id="title">{{data.title}}</span>
+        <div id="letter">{{data.grade_letter}}</div>
+        <div><span>{{data.grade_percent}}</span>%</div>
       </div>
-      <iron-collapse id="table">
+      <iron-collapse id="tableCollapse">
         <polymer-table data="{{data.assignments}}">
           <polymer-column name="title">Title</polymer-column>
+          <polymer-column name="date_assigned">Assigned</polymer-column>
+          <polymer-column name="date_due">Due</polymer-column>
           <polymer-column name="score">Score</polymer-column>
           <polymer-column name="max_score">Total</polymer-column>
-          <polymer-column name="date_due">Due</polymer-column>
+          <polymer-column name="category">Category</polymer-column>
         </polymer-table>
       </iron-collapse>
     </paper-material>
   </template>
+
   <script>
     (function () {
       Polymer({
@@ -22,8 +47,12 @@
           data: {
             type: Object
           }
-        }
+        },
+        overviewTapped: function() {
+          this.$.tableCollapse.toggle();
+        },
       });
     })();
   </script>
+
 </dom-module>

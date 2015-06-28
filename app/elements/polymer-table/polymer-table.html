@@ -1,14 +1,26 @@
+<!DOCTYPE html>
 <dom-module id="polymer-table">
-  <link rel="import" type="css" href="css/style.css">
+
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .table > th { font-weight: 300; }
+    table, th, td {
+      font-weight: 300;
+    }
+    .table { font-weight: 300; }
+  </style>
+
   <template>
     <div hidden>
       <content></content>
     </div>
-    <table class="table table-hover">
+    <table class="table table-bordered">
       <tr class="headers"></tr>
     </table>
   </template>
-
   <script>
     (function () {
       Polymer({

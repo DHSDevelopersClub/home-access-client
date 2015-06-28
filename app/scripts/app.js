@@ -37,6 +37,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   });
 
   app.passwordIsWrong = false;
+  var d = new Date();
+  app.currentYear = d.getFullYear();
+  d = undefined;
 
   app.onMenuSelect = function() {
     var drawerPanel = document.querySelector('#paperDrawerPanel');
