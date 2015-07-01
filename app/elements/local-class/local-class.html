@@ -21,6 +21,9 @@
 
   <template>
     <paper-material elevation="1">
+      <iron-collapse id="graphCollapse">
+        <google-chart></google-chart>
+      </iron-collapse>
       <div id="overview" on-tap="overviewTapped">
         <span id="title">{{data.title}}</span>
         <div id="letter">{{data.grade_letter}}</div>
@@ -51,6 +54,7 @@
         overviewTapped: function() {
           this.$.tableCollapse.toggle();
         },
+
       });
     })();
   </script>
