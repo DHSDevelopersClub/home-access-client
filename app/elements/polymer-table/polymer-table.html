@@ -5,12 +5,8 @@
     table {
       border-collapse: collapse;
       width: 100%;
-    }
-    .table > th { font-weight: 300; }
-    table, th, td {
       font-weight: 300;
     }
-    .table { font-weight: 300; }
   </style>
 
   <template>
@@ -40,7 +36,8 @@
              var tableText = tableLocation.innerHTML;
              [].forEach.call(columnElements, function(c) {
                columns.push(c.attributes.name.value);
-               tableText += '<th>' + c.innerHTML + '</th>';
+               // A bit hacky, I know, but it works.
+               tableText += '<th style="font-weight: 300;">' + c.innerHTML + '</th>';
              });
              this.data.forEach(function(rowData) {
                tableText += '<tr>';
