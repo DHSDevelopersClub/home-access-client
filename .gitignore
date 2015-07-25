@@ -59,7 +59,5 @@ target/
 #Polymer
 node_modules
 dist
-test/temp
 bower_components
 .tmp
-test/bower_components/

@@ -9,7 +9,7 @@
 * [Material Design](http://www.google.com/design/spec/material-design/introduction.html) layout
 * Routing with [Page.js](https://visionmedia.github.io/page.js/)
 * Unit testing with [Web Component Tester](https://github.com/Polymer/web-component-tester)
-* Offline-first setup through [Platinum](https://elements.polymer-project.org/browse?package=platinum-elements) Service Worker elements
+* Optional offline setup through [Platinum](https://elements.polymer-project.org/browse?package=platinum-elements) Service Worker elements
 * End-to-end Build Tooling (including [Vulcanize](https://github.com/Polymer/vulcanize))
 
 ## Getting Started
@@ -118,9 +118,56 @@ Polymer uses [Bower](http://bower.io) for package management. This makes it easy
 
 ## Service Worker
 
-Polymer Starter Kit offers an offline-first experience thanks to Service Worker and the [Platinum Service Worker elements](https://github.com/PolymerElements/platinum-sw). New to Service Worker? Read the following [introduction](http://www.html5rocks.com/en/tutorials/service-worker/introduction/) to understand how it works.
+Polymer Starter Kit offers an optional offline experience thanks to Service Worker and the [Platinum Service Worker elements](https://github.com/PolymerElements/platinum-sw). New to Service Worker? Read the following [introduction](http://www.html5rocks.com/en/tutorials/service-worker/introduction/) to understand how it works.
 
-Our default offline setup should work well for relatively simple applications. For more complex apps, we recommend learning how Service Worker works so that you can make the most of the Platinum Service Worker element abstractions.
+Our optional offline setup should work well for relatively simple applications. For more complex apps, we recommend learning how Service Worker works so that you can make the most of the Platinum Service Worker element abstractions.
+
+### Enable Service Worker support?
+
+To enable Service Worker support for Polymer Starter Kit project use these 3 steps:
+
+1. Uncomment Service Worker code in index.html
+  ```HTML
+  <!-- Uncomment next block to enable Service Worker support (1/2) -->
+  <!--
+  <paper-toast id="caching-complete"
+               duration="6000"
+               text="Caching complete! This app will work offline.">
+  </paper-toast>
+
+  <platinum-sw-register auto-register
+                        clients-claim
+                        skip-waiting
+                        on-service-worker-installed="displayInstalledToast">
+    <platinum-sw-cache default-cache-strategy="networkFirst"
+                       precache-file="precache.json">
+    </platinum-sw-cache>
+  </platinum-sw-register>
+  -->
+  ```
+2. Uncomment Service Worker code in elements.html
+
+  ```HTML
+  <!-- Uncomment next block to enable Service Worker Support (2/2) -->
+  <!--
+  <link rel="import" href="../bower_components/platinum-sw/platinum-sw-cache.html">
+  <link rel="import" href="../bower_components/platinum-sw/platinum-sw-register.html">
+  -->
+  ```
+3. Add 'precache' to the list in the 'default' gulp task like below.
+[(gulpfile.js)](https://github.com/PolymerElements/polymer-starter-kit/blob/master/gulpfile.js)
+
+  ```JavaScript
+  // Build Production Files, the Default Task
+  gulp.task('default', ['clean'], function (cb) {
+    runSequence(
+      ['copy', 'styles'],
+      'elements',
+      ['jshint', 'images', 'fonts', 'html'],
+      'vulcanize', 'precache',
+      cb);
+  });
+  ```
 
 #### Filing bugs in the right place
 
@@ -160,15 +207,14 @@ In order to guarantee that the latest version of your Service Worker script is b
 
 If you find anything to still be stale, you can also try navigating to `chrome:serviceworker-internals` (in Chrome), finding the relevant Service Worker entry for your application and clicking 'Unregister' before refreshing your app. This will (of course) only clear it from the local development machine. If you have already deployed to production then further work will be necessary to remove it from your user's machines.
 
-#### Not yet ready for Service Worker support?
+#### Disable Service Worker support after you enabled it
 
-If for any reason you decide that Service Worker support isn't for you, you can disable it from your Polymer Starter Kit project using these 3 steps:
+If for any reason you need to disable Service Worker support after previously enabling it, you can remove it from your Polymer Starter Kit project using these 4 steps:
 
-* Remove 'precache' from the list in the 'default' gulp task ([gulpfile.js](https://github.com/PolymerElements/polymer-starter-kit/blob/master/gulpfile.js))
-* Remove the two Platinum Service Worker elements (platinum-sw/..) in [app/elements/elements.html](https://github.com/PolymerElements/polymer-starter-kit/blob/master/app/elements/elements.html)
-* Remove references to the platinum-sw elements from your application [index](https://github.com/PolymerElements/polymer-starter-kit/blob/master/app/index.html).
-
-You will also want to navigate to `chrome://serviceworker-internals` and unregister any Service Workers registered by Polymer Starter Kit for your app just in case there's a copy of it cached.
+1. Remove references to the platinum-sw elements from your application [index](https://github.com/PolymerElements/polymer-starter-kit/blob/master/app/index.html).
+2. Remove the two Platinum Service Worker elements (platinum-sw/..) in [app/elements/elements.html](https://github.com/PolymerElements/polymer-starter-kit/blob/master/app/elements/elements.html)
+3. Remove 'precache' from the list in the 'default' gulp task ([gulpfile.js](https://github.com/PolymerElements/polymer-starter-kit/blob/master/gulpfile.js))
+4. Navigate to `chrome://serviceworker-internals` and unregister any Service Workers registered by Polymer Starter Kit for your app just in case there's a copy of it cached.
 
 ## Yeoman support
 
@@ -176,19 +222,19 @@ You will also want to navigate to `chrome://serviceworker-internals` and unregis
 
 ## Frequently Asked Questions
 
-> Where do I customise my application theme?
+### Where do I customise my application theme?
 
 Theming can be achieved using [CSS Custom properties](https://www.polymer-project.org/1.0/docs/devguide/styling.html#xscope-styling-details) via [app/styles/app-theme.html](https://github.com/PolymerElements/polymer-starter-kit/blob/master/app/styles/app-theme.html).
 You can also use `app/styles/main.css` for pure CSS stylesheets (e.g for global styles), however note that Custom properties will not work there under the shim.
 
 A [Polycast](https://www.youtube.com/watch?v=omASiF85JzI) is also available that walks through theming using Polymer 1.0.
 
-> Where do I configure routes in my application?
+### Where do I configure routes in my application?
 
 This can be done via [`app/elements/routing.html`](https://github.com/PolymerElements/polymer-starter-kit/blob/master/app/elements/routing.html). We use Page.js for routing and new routes
 can be defined in this import. We then toggle which `<iron-pages>` page to display based on the [selected](https://github.com/PolymerElements/polymer-starter-kit/blob/master/app/index.html#L105) route.
 
-> Why are we using Page.js rather than a declarative router like `<more-routing>`?
+### Why are we using Page.js rather than a declarative router like `<more-routing>`?
 
 `<more-routing>` (in our opinion) is good, but lacks imperative hooks for getting full control
 over the routing in your application. This is one place where a pure JS router shines. We may
@@ -196,7 +242,7 @@ at some point switch back to a declarative router when our hook requirements are
 said, it should be trivial to switch to `<more-routing>` or another declarative router in your
 own local setup.
 
-> Where can I find the application layouts from your Google I/O 2015 talk?
+### Where can I find the application layouts from your Google I/O 2015 talk?
 
 App layouts live in a separate repository called [app-layout-templates](https://github.com/PolymerElements/app-layout-templates).
 You can select a template and copy over the relevant parts you would like to reuse to Polymer Starter Kit.
@@ -204,7 +250,7 @@ You can select a template and copy over the relevant parts you would like to reu
 You will probably need to change paths to where your Iron and Paper dependencies can be found to get everything working.
 This can be done by adding them to the [`elements.html`](https://github.com/PolymerElements/polymer-starter-kit/blob/master/app/elements/elements.html) import.
 
-> Something has failed during installation. How do I fix this?
+### Something has failed during installation. How do I fix this?
 
 Our most commonly reported issue is around system permissions for installing Node.js dependencies.
 We recommend following the [fixing npm permissions](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md)
@@ -213,7 +259,7 @@ to work around these issues, this guide may also be useful for avoiding that.
 
 If you run into an exception that mentions five optional dependencies failing (or an `EEXIST` error), you
 may have run into an npm [bug](https://github.com/npm/npm/issues/6309). We recommend updating to npm 2.11.0+
-to work around this. You can do this by opening a Command Prompt/terminal and running `npm install npm@2.11.0 -g`. If you are on Windows, 
+to work around this. You can do this by opening a Command Prompt/terminal and running `npm install npm@2.11.0 -g`. If you are on Windows,
 Node.js (and npm) may have been installed into `C:\Program Files\`. Updating npm by running `npm install npm@2.11.0 -g` will install npm
 into `%AppData%\npm`, but your system will still use the npm version. You can avoid this by deleting your older npm from `C:\Program Files\nodejs`
 as described [here](https://github.com/npm/npm/issues/6309#issuecomment-67549380).
@@ -223,8 +269,7 @@ a dependency failed to correctly install. We recommend running `npm cache clean`
 `npm install` to see if this corrects the problem. If not, please check the [issue tracker](https://github.com/PolymerElements/polymer-starter-kit/issues) in case
 there is a workaround or fix already posted.
 
-
-> I'm having trouble getting Vulcanize to fully build my project on Windows. Help?
+### I'm having trouble getting Vulcanize to fully build my project on Windows. Help?
 
 Some Windows users have run into trouble with the `elements.vulcanized.html` file in their `dist` folder
 not being correctly vulcanized. This can happen if your project is in a folder with a name containing a
@@ -236,7 +281,7 @@ to correctly build. We are still investigating this, however for the time-being 
 you find your builds getting stuck here.
 
 
-> How do I add new JavaScript files to Starter Kit so they're picked up by the build process?
+### How do I add new JavaScript files to Starter Kit so they're picked up by the build process?
 
 At the bottom of `app/index.html`, you will find a build block that can be used to include additional
 scripts for your app. Build blocks are just normal script tags that are wrapped in a HTML
@@ -254,7 +299,9 @@ during a build.
 <!-- endbuild-->
 ```
 
-> I'm finding the installation/tooling here overwhelming. What should I do?
+If you are not using the build-blocks, but still wish for additional files (e.g scripts or stylesheets) to be included in the final `dist` directory, you will need to either copy these files as part of the gulpfile.js build process (see the `copy` task for how to automate this) or manually copy the files.
+
+### I'm finding the installation/tooling here overwhelming. What should I do?
 
 Don't worry! We've got your covered. Polymer Starter Kit tries to offer everything you need to build and optimize your apps for production, which is why we include the tooling we do. We realise however that our tooling setup may not be for everyone.
 
