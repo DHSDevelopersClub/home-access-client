@@ -73,19 +73,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <!-- Drawer Content -->
         <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
-          <a data-route="home" href="/">
-            <iron-icon icon="home"></iron-icon>
-            <span>Home</span>
+          <a data-route="classwork" href="/classwork">
+            <iron-icon icon="book"></iron-icon>
+            <span>Classwork</span>
           </a>
 
-          <a data-route="users" href="/users">
-            <iron-icon icon="info"></iron-icon>
-            <span>Users</span>
+          <a data-route="grades" href="/grades">
+            <iron-icon icon="grade"></iron-icon>
+            <span>Grades</span>
           </a>
 
-          <a data-route="contact" href="/contact">
-            <iron-icon icon="mail"></iron-icon>
-            <span>Contact</span>
+          <a data-route="schedule" href="/schedule">
+            <iron-icon icon="today"></iron-icon>
+            <span>Schedule</span>
           </a>
         </paper-menu>
       </div>
@@ -112,7 +112,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="content">
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
-            <section data-route="home">
+            <section data-route="login">
+              <paper-material elevation="1">
+                <h2 class="paper-font-display2">Login</h2>
+                <p>This is the users section</p>
+                <a href="/users/Rob">Rob</a>
+              </paper-material>
+            </section>
+
+            <section data-route="classwork">
 
               <template is="dom-repeat" items="{{classrooms}}" id="classes">
                 <local-class data="{{item}}"></local-class>
@@ -120,14 +128,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
               <paper-material elevation="1" class="paper-font-body2">
                 <h1>&copy; 2014-<span>{{currentYear}}</span> SB Techology Holdings Intenational &amp; DHS Developer Club</h1>
-                <p>Authors Sebastian Boyd, Alexander Otavka</p>
+                <p>Authors: Sebastian Boyd, Alexander Otavka</p>
               </paper-material>
 
             </section>
 
-            <section data-route="users">
+            <section data-route="grades">
               <paper-material elevation="1">
-                <h2 class="paper-font-display2">Users</h2>
+                <h2 class="paper-font-display2">Grades</h2>
                 <p>This is the users section</p>
                 <a href="/users/Rob">Rob</a>
               </paper-material>
@@ -142,7 +150,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               </paper-material>
             </section>
 
-            <section data-route="contact">
+            <section data-route="schedule">
               <paper-material elevation="1">
                 <h2 class="paper-font-display2">Contact</h2>
                 <p>This is the contact section</p>
