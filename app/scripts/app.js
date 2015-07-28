@@ -75,6 +75,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   };
 
   app.loadGradeInfo = function() {
+    var client = new XMLHttpRequest();
+    client.open('GET', '/sample_data.json');
+    client.onreadystatechange = function() {
+      app.classrooms = JSON.parse(client.responseText);
+    }
+    client.send();
+    /*
     if (localStorage[app.username]) {
       try {
         app.classrooms = JSON.parse(GibberishAES.dec(localStorage[app.username], app.password));
@@ -101,6 +108,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       });
     }
+    */
   };
 
   var sendPostRequest = function(username, password, callback) {
