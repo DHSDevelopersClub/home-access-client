@@ -3,8 +3,6 @@
 
 from protorpc import messages
 
-#New stuff for HAC client
-
 class AssigmentHAC(messages.Message):
     title = messages.StringField(1)
     category = messages.StringField(2)
@@ -39,3 +37,18 @@ class ClassesHAC(messages.Message):
         OK = 0
         LOGIN_ERROR = 1
     status = messages.EnumField(LoginStatus, 2)
+
+class TextMessage(messages.Message):
+    recipient = messages.StringField(1)
+    sender = messages.StringField(2)
+    from = messages.StringField(3)
+    subject = messages.StringField(4)
+    body-plain = messages.StringField(5)
+    stripped-text = messages.StringField(6)
+    stripped-signature = messages.StringField(7)
+    body-html = messages.StringField(8)
+    stripped-html = messages.StringField(9)
+    attachment-count = messages.IntegerField(10)
+    timestamp = messaegs.IntegerField(11)
+    token = messages.StringField(12)
+    signature = messages.StringField(13)

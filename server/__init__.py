@@ -22,10 +22,10 @@ ANDROID_CLIENT_ID = ''
 IOS_CLIENT_ID = ''
 ANDROID_AUDIENCE = ANDROID_CLIENT_ID
 
-@endpoints.api(name='homeaccessclient', version='v1',
-               allowed_client_ids=[WEB_CLIENT_ID, endpoints.API_EXPLORER_CLIENT_ID])
+@endpoints.api(name='homeaccessclient', version='v1')
 class HomeAccessClientApi(remote.Service):
-    @endpoints.method(LoginHAC, ClassesHAC, name='login')
+    @endpoints.method(LoginHAC, ClassesHAC, name='login',
+                      allowed_client_ids=[WEB_CLIENT_ID, endpoints.API_EXPLORER_CLIENT_ID])
     def login(self, request):
         cj = cookielib.CookieJar()
         opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
@@ -87,5 +87,10 @@ class HomeAccessClientApi(remote.Service):
             classes_list.append(ClassHAC(assignments=assignment_list, title=class_title, grade_table=grade_list, grade_percent=grade_percent, grade_letter=grade_letter))
 
         return ClassesHAC(classes=classes_list, status=login_status)
+
+    # Text Message refers to text based communication; sms, email
+    @endpoints.method(TextMessage, ClassesHAC, name='incomingtextrequest')
+    def incomingtextrequest(self, request):
+        
 
 application = endpoints.api_server([HomeAccessClientApi])
